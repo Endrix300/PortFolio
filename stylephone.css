@@ -1,0 +1,738 @@
+
+.hidden{
+    display: none;
+}
+.flex{
+    display: flex;
+}
+.block{
+    display: block;
+}
+.no-scroll {
+    overflow: hidden;
+    height: 100%; /* Empêche tout défilement en fixant la hauteur */
+}
+
+
+body {
+    width: 100%;
+    height: 100vh;
+    font-family: Arial, sans-serif;
+    background-image: url("assets\\Background.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    margin: 0;
+    padding: 0;
+    position: relative; /* Nécessaire pour que le ::before se positionne correctement */
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.913); /* Couleur noire semi-transparente */
+}
+
+
+.container{
+    position: relative;
+    z-index: 2; /* Assure que le contenu soit au-dessus de la superposition */
+    max-width: 100%;
+    margin: auto;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}  
+
+
+.card-nav {
+    display: flex;
+    flex-direction: column; /* Aligne les éléments verticalement */
+    align-items: center; /* Centre le contenu horizontalement */
+}
+
+.navlink {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    font-size: 15px;
+    position: relative;
+    margin-top: 20px;
+    height: 100%;
+}
+
+.navlink .head{
+    display: flex;
+    align-items: center;
+    width: 100%;
+    font-size: 15px;
+    z-index: 5;
+    
+}
+
+.head{
+    width: 100%;
+    position: fixed;
+    background-color: rgb(0, 0, 0);
+    top: 0;
+    border-radius: 10px;
+    margin-left: -20px;
+    height: 40px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.nav-bar {
+    display: flex;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+    margin-left: 20px;
+}
+
+.logo-title {
+    position: absolute;
+    left: 50%;
+    font-size: 20px;
+    transform: translateX(-50%);
+    cursor: pointer;
+    text-align: center;
+}
+
+.fa-download{
+    color: #0056b3;
+    transition: transform 0.3s;
+    font-size: 30px;
+    cursor: pointer;
+}
+.fa-download:hover{
+    transform: scale(0.8);
+}
+
+/* Style pour le conteneur tooltip */
+.tooltip {
+    position: relative;
+    display: inline-block;
+    left: 75%;
+    transform: translateX(-50%);
+}
+
+/* Style pour le texte du tooltip */
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 5px;
+    border-radius: 5px;
+
+    /* Positionnement du tooltip */
+    position: absolute;
+    z-index: 1;
+    top: 120%; /* En bas de l'icône */
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+/* Triangle au-dessus du tooltip */
+.tooltip .tooltiptext::after {
+    content: "";
+    position: absolute;
+    bottom: 100%; /* En haut du texte */
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent transparent #333 transparent;
+}
+
+/* Affichage au survol */
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+}
+
+.logo-title h1{
+    color: white;
+    transition: transform 0.3s;
+}
+
+
+.logo-title h1:hover {
+    transform: scale(0.9);
+}
+
+.nav-bar input {
+    display: block;
+    width: 40px;
+    height: 32px;
+    cursor: pointer;
+    position: absolute;
+    left: -7px;
+    top: -4px;
+    opacity: 0;
+    z-index: 2;
+}
+
+.nav-bar span {
+    display: block;
+    width: 34px;
+    height: 7px;
+    background-color: #ffffff;
+    margin-bottom: 5px;
+    border-radius: 10px;
+    transition: transform 0.3s, opacity 0.3s;
+}
+
+
+/* Transformations des barres */
+.bar1{
+    transform: rotate(45deg) translate(7.5px, 6px);
+}
+
+.bar2 {
+    opacity: 0;
+}
+
+.bar3 {
+    transform: rotate(-45deg) translate(10px, -10px);
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+.side-bar {
+    position: fixed; /* Fixe la barre latérale à l'écran */
+    top: 60px; /* Décalée de 60px sous le haut */
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 4;
+    opacity: 0;
+    visibility: hidden; /* Cachée, mais toujours rendue */
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    display: flex; /* S'assure que l'intérieur est flexbox */
+}
+
+.side-bar.visible {
+    opacity: 1;
+    visibility: visible; /* Devient visible */
+}
+
+
+.bar-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 100%; /* Prend toute la hauteur de la vue */
+    background-color: rgb(0, 0, 0);
+    border-radius: 10px;
+    position: absolute;
+    box-shadow: 0 0 0 300px #000000ec;
+}
+.bar-container span{
+    width: 100%;
+    height: 30%;
+    display: flex;
+    justify-content: center;
+    cursor: pointer;
+    align-items: center;
+    color: #0056b3;
+    border-radius: 10px;
+    font-size: 32px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    transition: background-color 0.3s, opacity 0.3s;
+    transition: transform 0.3s;
+}
+
+.bar-container span:hover{
+    transform: scale(1.2);
+}
+
+
+.srch {
+    display: flex; /* Utiliser flexbox pour aligner les éléments en ligne */
+    flex-direction: column;
+    justify-content: flex-start; /* Aligne les éléments au début, à gauche */
+    width: 100%; /* Fait en sorte que le conteneur prenne toute la largeur */
+    margin-top: 20px; /* Espace au-dessus des éléments de recherche */
+}
+
+.input{
+    display: flex; /* Utiliser flexbox pour aligner les éléments en ligne */
+    justify-content: flex-start; /* Aligne les éléments au début, à gauche */
+    gap: 30px;
+}
+
+input[type="text"] {
+    color: white;
+    background-color: #3f3f3f;
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #cccccc00;
+    border-radius: 4px;
+}
+
+input[type="text"]:focus {
+    outline: none; /* Supprime l'outline par défaut */
+    border: 1px solid #ffffff; /* Changez cette couleur selon votre préférence */
+}
+
+button {
+    padding: 10px; /* Padding horizontal seulement */
+    height: 40px; /* Même hauteur que l'input */
+    background-color: #3f3f3f;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+h2{
+    color: white;
+    margin-bottom: 70px;
+}
+
+.card-list h2{
+    color: white;
+    margin-bottom: 30px;
+}
+
+.card{
+    width: 100%;           /* Largeur fixe pour chaque carte */
+    height: auto;          /* Hauteur fixe */
+    background-color: #00000000;
+    border-radius: 8px;     /* Coins arrondis */
+    margin: 20px;
+    color: white;
+}
+
+.list {
+    width: 80%;
+    min-width: 40%;
+    position: relative;
+    display: flex;
+    flex-direction: row; /* Définit l'alignement horizontal pour les cartes */
+    align-items: center;
+    overflow-x: auto; /* Active le défilement horizontal */
+    gap: 10px; /* Espace entre les cartes */
+    padding: 10px; /* Optionnel : espace autour de la zone de défilement */
+    scroll-behavior: smooth; /* Permet un défilement fluide */
+    top:10px;
+    scrollbar-width: thin; /* Rendre la scrollbar plus fine */
+    scrollbar-color: #0057b3 #2c2c2c; /* couleur de la barre de défilement et du track */
+}
+
+.list .result-item{
+    width: 68px;
+    height: 120px;
+}
+
+.list .card-result {
+    width: 79px; 
+    height: 70px; /* Ajustez selon vos besoins */
+}
+
+.card-anime {
+    background-color: #0057b361;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px; /* Espace autour du texte */
+    width: fit-content; /* Ajuste la largeur au contenu */
+    border-radius: 8px; /* Coins arrondis, optionnel */
+}
+
+.card-anime img{
+    width: 200px;
+    height: auto;
+    border-radius: 5px;
+    margin-bottom: 5px; /* Réduit l'espace sous l'image */
+}
+
+.card-anime span{
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+}
+
+
+.card .card-title{
+    font-size: 30px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-weight: bold;
+    margin: 50px;
+}
+
+
+.cards .card:nth-of-type(1) .card-anime{
+    background-color: #0057b361;
+}
+.cards .card:nth-of-type(1) i,
+.cards .card:nth-of-type(1) .card-title {
+    color: #0056b3; /* Couleur pour le premier titre */
+}
+
+.cards .card:nth-of-type(2) .card-anime{
+    background-color: #ff008861;
+}
+.cards .card:nth-of-type(2) i,
+.cards .card:nth-of-type(2) .card-title {
+    color: #ff0088; /* Couleur pour le premier titre */
+}
+
+.cards .card:nth-of-type(3) .card-anime{
+    background-color: #fdd30048;
+}
+.cards .card:nth-of-type(3) i,
+.cards .card:nth-of-type(3) .card-title {
+    color: #fdd300; /* Couleur pour le deuxième titre */
+}
+
+.cards .card:nth-of-type(4) .card-anime{
+    background-color: #00c61453;
+}
+.cards .card:nth-of-type(4) i,
+.cards .card:nth-of-type(4) .card-title {
+    color: #00c614; /* Couleur pour le troisième titre */
+}
+.cards .card:nth-of-type(5) .card-anime{
+    background-color: #8800ff53;
+}
+.cards .card:nth-of-type(5) i,
+.cards .card:nth-of-type(5) .card-title {
+    color: #8800ff; /* Couleur pour le troisième titre */
+}
+
+i{
+    font-size: 25px;
+}
+
+.results {
+    justify-content: center;
+    color: white;
+    margin-top: 20px;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+.result-item {
+    cursor: pointer;
+    width: 80px;
+    height: 140px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin: 10px 0;
+    padding: 10px;
+    background-color: #232323;
+    border: 1px solid #006086;
+    border-radius: 10px;
+    text-align: center; /* Centrage du texte dans .result-item */
+    transition: box-shadow 0.3s ease; /* Animation de l'ombre */
+}
+
+.result-item:hover{
+    box-shadow: 0 16px 32px rgba(0, 76, 255, 0.3); /* Ombre subtile */
+    transform: scale(1.02); /* Légère mise à l'échelle pour un effet visuel plus dynamique */
+}
+
+.result-item span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    word-break: break-word;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    text-align: center; /* Centrage du texte dans le span */
+}
+
+
+html {
+    scrollbar-width: thin; /* Rendre la scrollbar plus fine */
+    scrollbar-color: #0057b3 #2c2c2c; /* couleur de la barre de défilement et du track */
+}
+
+.card-result {
+    width: 90px; 
+    height: 90px; /* Ajustez selon vos besoins */
+    border-radius: 5px;
+}
+
+.anime{
+    max-width: 100%;
+    margin: 10px 0;
+    padding: 10px;
+    border: 1px solid #006086;
+    background-color: #23232387;
+    border-radius: 10px;
+
+}
+
+.anime-infos {
+    width: 100%;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+}
+
+.button-infos{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 25px;
+    flex-wrap: wrap;
+}
+.button-infos button{
+    width: 120px;
+    height: 40px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    gap: 10px;
+    font-size: 10px;
+    transition: background-color 0.3s ease; /* Animation de l'ombre */
+}
+
+button span{
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+}
+
+.button-infos button:nth-child(1){
+    background-color: #0057b348;
+}
+.button-infos button:nth-child(2){
+    background-color: #ff008848;
+}
+.button-infos button:nth-child(3){
+    background-color: #fdd30048;
+}
+.button-infos button:nth-child(4){
+    background-color: #00c61448;
+}
+.button-infos button:nth-child(5){
+    background-color: #8800ff48;
+}
+
+.synopsis {
+    width: 100%; /* Utilise toute la largeur disponible de .anime-infos */
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    box-sizing: border-box; /* Assure que le padding et border sont inclus dans la largeur */
+    flex-wrap: wrap;
+}
+
+.synopsis span {
+    display: inline-block; /* Permet au texte de passer à la ligne */
+    word-wrap: break-word; /* Force les mots très longs à se couper pour aller à la ligne */
+    flex-wrap: wrap;
+    text-wrap: wrap;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    text-align: center; /* Centrage du texte dans le span */
+    font-size: 10px;
+}
+
+
+.image-infos {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 300px; 
+    height: 250px;
+}
+
+
+
+.head-infos{
+    gap: 20px;
+    display: flex;
+    align-items: center; /* Centrer le contenu verticalement */
+    justify-content: center;
+    margin-bottom: -50px;
+}
+
+
+
+
+.head-infos .fa-solid{
+    cursor: pointer;
+    position: relative;
+    color: white;
+    bottom: 25px;
+    font-size: 20px; /* Taille de base de l'icône */
+    transition: transform 0.3s; /* Animation de l'agrandissement */
+
+}
+
+.head-infos .fa-solid:hover{
+    transform: scale(1.5); /* Augmente la taille de l'icône sans changer son espace */
+}
+
+
+.categories-nav{
+    flex-direction: row;
+    color: white;
+    justify-content: center;
+    align-items: center;
+    gap: 80px;
+}
+
+
+.categories-nav h1{
+    color: #0056b3;
+}
+
+.categories-nav .arrow{
+    position: absolute;
+    transition: transform 0.2s;
+    background-color: #3f3f3f;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #cccccc00;
+}
+
+.categories-nav .arrow:first-child{
+    left: 40px;
+}
+.categories-nav .arrow:last-child{
+    right: 40px;
+}
+
+.categories-nav .arrow:hover{
+    cursor: pointer;
+    background-color: #0056b3;
+}
+
+.genres-list {
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.genre {
+    width: 85px;
+    display: flex;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 10px;
+    border-radius: 8px;
+    transition: background-color 0.3s;
+    cursor: pointer;
+}
+
+.genres-list .side-bar{
+    display: flex;
+    margin-top: 165px;
+}
+
+.genre:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.genre-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    padding: 10px;
+    width: 100%;
+    height: 70vh; /* Prend toute la hauteur de la vue */
+    overflow-y: auto;
+    background-color: #000;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+
+.genre span {
+    color: white;
+    word-break: break-word; /* Les mots trop longs seront coupés à la ligne suivante */
+    color: white;
+    font-family: Arial, sans-serif;
+}
+
+.genre input {
+    height: 9px;
+}
+
+
+#filtrebtn{
+    cursor: pointer;
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    font-size: 30px;
+}
+
+.genre-container span{
+    width: 100%;
+    display: flex;
+    cursor: pointer;
+    color: #0056b3;
+    border-radius: 10px;
+    font-size: 10px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    transition: background-color 0.3s, opacity 0.3s;
+}
+
+.page{
+    flex-direction: row;
+    color: white;
+    justify-content: center;
+    align-items: center;
+    gap: 80px;
+}
+
+.page h1{
+    color: #0056b3;
+}
+
+.page .arrow{
+    position: absolute;
+    transition: transform 0.2s;
+    background-color: #3f3f3f;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #cccccc00;
+}
+
+.page .arrow:first-child{
+    left: 40px;
+}
+.page .arrow:last-child{
+    right: 40px;
+}
+
+.page .arrow:hover{
+    cursor: pointer;
+    background-color: #0056b3;
+}
