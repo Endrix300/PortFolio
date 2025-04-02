@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; style-src 'self' https://cdnjs.cloudflare.com; img-src 'self' data: https://cdn.myanimelist.net; font-src 'self' https://cdnjs.cloudflare.com; connect-src 'self' https://api.jikan.moe https://api.mymemory.translated.net;">
+    <link id="style" rel="stylesheet" href="styleordi.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="shortcut icon" href="assets\logo.ico" />
+</head>
+    <title>My Anime List</title>
+</head>
+<body>
+    <div class="container">
+        <div class="card-nav">
+            <div id="ordi" class="head">
+                <div class="nav-link">
+                    <div class="logo-title">
+                        <h1 id="accueil">AnimeList</h1>
+                    </div>
+                    <div id="bar-container" class="bar-container">
+                        <h1 id="catalogue">Catalogue</h1> 
+                        <h1 id="planning">Planning</h1>
+                        <h1 id="recommandation">Recommandation</h1>
+                        <div class="tooltip">
+                            <i id="download" class="fa-solid fa-download"></i>
+                            <span class="tooltiptext">Télécharger</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="phone" class="navlink hidden">
+                <div class="head">
+                    <div class="nav-bar">
+                        <input type="checkbox" id="hamburger">
+                        <div class="bar">
+                            <span id="bar1"></span>
+                            <span id="bar2"></span>
+                            <span id="bar3"></span>
+                        </div>
+                    </div>
+                    <div class="logo-title">
+                        <h1 id="accueil1">AnimeList</h1>
+                    </div>
+                    <div class="tooltip">
+                        <i id="download2" class="fa-solid fa-download"></i>
+                        <span class="tooltiptext">Télécharger</span>
+                    </div>
+                </div>
+                <div id="sideBar" class="side-bar">
+                    <div class="bar-container">
+                        <span id="catalogue1">Catalogue</span> 
+                        <span id="planning1">Planning</span>
+                        <span id="recommandation1">Recommandation</span>
+                    </div>
+                </div>
+                
+            </div> 
+            <div class="srch">
+                <div class="input">
+                    <input type="text" id="search" placeholder="Entrez le nom de l'anime...">
+                    <button id="searchButton">Rechercher</button>
+                </div>
+                <div id="categories-nav" class="categories-nav hidden">
+                    <div id="arrow-left" class="arrow hidden" ><i class="fa-solid fa-arrow-left"></i></div>
+                    <h1 id="categories-title">Title</h1>
+                    <div id="arrow-right" class="arrow hidden" ><i class="fa-solid fa-arrow-right"></i></div>
+                </div>
+                <div id="genres-list" class="genres-list hidden">
+                    <span id="filtrebtn">Filtre</span>
+                    <div id="genre-bars" class="side-bar">
+                        <div id="genre-container" class="genre-container">
+                            
+                        </div>
+                    </div>
+                </div>
+                <div id="results" class="results hidden">
+                </div>
+                <div id="page-nav" class="page hidden">
+                    <div id="page-left" class="arrow" ><i class="fa-solid fa-arrow-left"></i></div>
+                    <h1 id="page-number">1</h1>
+                    <div id="page-right" class="arrow" ><i class="fa-solid fa-arrow-right"></i></div>
+                </div>
+                <div id="anime" class="anime hidden">
+                    <div id="headinfos" class="head-infos">
+                        <i id="return" class="fa-solid fa-rotate-left"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-list" id="cardList">
+            <h2>List de mes animés</h2>
+            <div class="cards">
+                <div class="card">
+                    <i class="fa-solid fa-tv"></i>
+                    <span id="watchlisttitle" class="card-title">WATCHLIST</span>
+                    <div id="listWatch" class="list">
+                    </div>
+                </div>
+                <div class="card">
+                    <i class="fa-solid fa-tv"></i>
+                    <span id="watchlistbistitle" class="card-title">WATCHLIST-2</span>
+                    <div id="listWatchbis" class="list">
+                    </div>
+                </div>
+                <div class="card">
+                    <i class="fa-regular fa-star"></i>
+                    <span id="favoristitle" class="card-title">FAVORIS</span>
+                    <div id="listFavoris" class="list">
+                    </div>
+                </div>
+                <div class="card">
+                    <i class="fa-regular fa-eye"></i>
+                    <span id="vustitle" class="card-title">VUS</span>
+                    <div id="listVus" class="list">
+                    </div>
+                </div>
+                <div class="card">
+                    <i class="fa-regular fa-star"></i>
+                    <span id="besttitle" class="card-title">Best</span>
+                    <div id="listBest" class="list">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script id="dynamicScript" src="script.js"></script>
+</body>
+</html>
